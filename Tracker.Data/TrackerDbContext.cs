@@ -1,21 +1,18 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Tracker.Data.Model;
 
 namespace Tracker.Data
 {
-    public class TrackerDbContext : DbContext
+    public class TrackerDbContext : IdentityDbContext<ApplicationUser>
     {
         public TrackerDbContext(DbContextOptions<TrackerDbContext> options) : base(options)
         {
         }
-        protected override void OnModelCreating(ModelBuilder builder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            builder.UseSerialColumns();
+            modelBuilder.UseSerialColumns();
+            base.OnModelCreating(modelBuilder);
         }
         public DbSet<Todo> Todo { get; set; }
     }
