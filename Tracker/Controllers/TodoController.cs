@@ -21,6 +21,7 @@ namespace Tracker.Controllers
             var result = _todoRepository.GetTodos();
             return Ok(result);
         }
+        //add
         [HttpPost("")]
         public IActionResult AddTodo(Todo model)
         {
