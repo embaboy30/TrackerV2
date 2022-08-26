@@ -7,5 +7,7 @@ namespace Tracker.IRepository
     {
         public List<Todo> GetTodos();
         public int AddTodo(TodoDto model);
+        int UpdateTodo(TodoDto model);
+        int DeleteTodo(int id);
     }
 }

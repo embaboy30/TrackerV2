@@ -22,11 +22,24 @@ namespace Tracker.Controllers
             var result = _todoRepository.GetTodos();
             return Ok(result);
         }
-        //add
+
         [HttpPost("")]
         public IActionResult AddTodo(TodoDto model)
         {
             var result = _todoRepository.AddTodo(model);
+            return Ok(result);
+        }
+
+        [HttpPut("")]
+        public IActionResult UpdateTodo(TodoDto model)
+        {
+            var result = _todoRepository.UpdateTodo(model);
+            return Ok(result);
+        }
+        [HttpDelete("")]
+        public IActionResult DeleteTodo(int id)
+        {
+            var result = _todoRepository.DeleteTodo(id);
             return Ok(result);
         }
     }

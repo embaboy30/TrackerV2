@@ -27,10 +27,29 @@ namespace Tracker.Repository
         public int AddTodo(TodoDto model)
         {
             var data = _mapper.Map<Todo>(model);
+            data.CreatedAt = DateTime.Now;
+            data.Tag = model.Tag;
+            data.CreatedBy = "admin"; // todo: use the current user
             _trackerDbContext.Todo.Add(data);
             _trackerDbContext.SaveChanges();
 
             return model.Id;
+        }
+        public int UpdateTodo(TodoDto model)
+        {
+            var todo = _trackerDbContext.Todo.Find(model.Id);
+            if (todo == null) return 0;
+            todo.Description = model.Description;
+            todo.Title = model.Title;
+            todo.GoalDate = model.GoalDate;
+            todo.Tag = model.Tag;
+            _trackerDbContext.Todo.Update(todo);
+            return _trackerDbContext.SaveChanges();
+        }
+        public int DeleteTodo(int id)
+        {
+            _trackerDbContext.Todo.Remove(new Todo() { Id = id });
+            return _trackerDbContext.SaveChanges();
         }
     }
 }
