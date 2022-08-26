@@ -1,35 +1,36 @@
-﻿using Tracker.Data;
+﻿using AutoMapper;
+using Tracker.Data;
 using Tracker.Data.Model;
+using Tracker.Data.ViewModel;
 using Tracker.IRepository;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tracker.Repository
 {
     public class TodoRepository : ITodoRepository
     {
         private readonly TrackerDbContext _trackerDbContext;
-        public TodoRepository(TrackerDbContext trackerDbContext)
+        private readonly IMapper _mapper;
+        public TodoRepository(TrackerDbContext trackerDbContext,
+            IMapper mapper
+            )
         {
             _trackerDbContext = trackerDbContext;
+            _mapper = mapper;
 
         }
         public List<Todo> GetTodos()
         {
-            var result = _trackerDbContext.Todo.ToList();
+            var result = _trackerDbContext.Todo.Include(x => x.Notes).ToList();
             return result;
         }
-        public int AddTodo(Todo model)
+        public int AddTodo(TodoDto model)
         {
-            var todo = new Todo()
-            {
-                Title = model.Title,
-                Description = model.Description,
-                Deadline = model.Deadline,
-            };
-
-            _trackerDbContext.Todo.Add(todo);
+            var data = _mapper.Map<Todo>(model);
+            _trackerDbContext.Todo.Add(data);
             _trackerDbContext.SaveChanges();
 
-            return todo.Id;
+            return model.Id;
         }
     }
 }

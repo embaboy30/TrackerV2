@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Tracker.Data.Model;
+using Tracker.Data.ViewModel;
 using Tracker.IRepository;
 
 namespace Tracker.Controllers
@@ -23,7 +24,7 @@ namespace Tracker.Controllers
         }
         //add
         [HttpPost("")]
-        public IActionResult AddTodo(Todo model)
+        public IActionResult AddTodo(TodoDto model)
         {
             var result = _todoRepository.AddTodo(model);
             return Ok(result);

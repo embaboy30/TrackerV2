@@ -15,5 +15,6 @@ namespace Tracker.Data
             base.OnModelCreating(modelBuilder);
         }
         public DbSet<Todo> Todo { get; set; }
+        public DbSet<Note> Note { get; set; }
     }
 }
