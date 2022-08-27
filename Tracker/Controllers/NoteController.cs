@@ -24,6 +24,7 @@ namespace Tracker.Controllers
             return Ok(result);
         }
 
+        // POST api/<NoteController>
         [HttpPost]
         public IActionResult Post([FromBody] Note model, int todoId)
         {
@@ -31,6 +32,7 @@ namespace Tracker.Controllers
             return Ok(result);
         }
 
+        // PUT api/<NoteController>/5
         [HttpPut]
         public IActionResult Put([FromBody] Note value)
         {
@@ -38,6 +40,7 @@ namespace Tracker.Controllers
             return Ok(result);
         }
 
+        // DELETE api/<NoteController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
