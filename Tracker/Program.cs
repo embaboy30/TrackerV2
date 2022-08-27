@@ -19,7 +19,10 @@ builder.Services.AddDbContext<TrackerDbContext>(
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<TrackerDbContext>()
     .AddDefaultTokenProviders();
+
+// Repository
 builder.Services.AddTransient<ITodoRepository, TodoRepository>();
+builder.Services.AddTransient<INoteRepository, NoteRepository>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

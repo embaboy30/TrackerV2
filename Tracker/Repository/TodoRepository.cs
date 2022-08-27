@@ -33,7 +33,7 @@ namespace Tracker.Repository
             _trackerDbContext.Todo.Add(data);
             _trackerDbContext.SaveChanges();
 
-            return model.Id;
+            return data.Id;
         }
         public int UpdateTodo(TodoDto model)
         {
