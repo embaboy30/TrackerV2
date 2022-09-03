@@ -5,8 +5,9 @@ namespace Tracker.IRepository
 {
     public interface ITodoRepository
     {
-        public List<Todo> GetTodos();
-        public int AddTodo(TodoDto model);
+        List<Todo> GetTodos();
+        List<Todo> GetTodosByMonth(int month);
+        int AddTodo(TodoDto model);
         int UpdateTodo(TodoDto model);
         int DeleteTodo(int id);
     }

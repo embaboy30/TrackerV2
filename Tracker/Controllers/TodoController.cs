@@ -22,6 +22,12 @@ namespace Tracker.Controllers
             var result = _todoRepository.GetTodos();
             return Ok(result);
         }
+        [HttpGet("{month}")]
+        public IActionResult GetTodosByMonth(int month)
+        {
+            var result = _todoRepository.GetTodosByMonth(month);
+            return Ok(result);
+        }
 
         [HttpPost("")]
         public IActionResult AddTodo(TodoDto model)

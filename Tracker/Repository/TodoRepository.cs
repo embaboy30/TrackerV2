@@ -24,6 +24,11 @@ namespace Tracker.Repository
             var result = _trackerDbContext.Todo.Include(x => x.Notes).ToList();
             return result;
         }
+        public List<Todo> GetTodosByMonth(int month)
+        {
+            var result = _trackerDbContext.Todo.Include(x => x.Notes).Where(x => x.GoalDate.Month == month).ToList();
+            return result;
+        }
         public int AddTodo(TodoDto model)
         {
             var data = _mapper.Map<Todo>(model);
