@@ -11,8 +11,9 @@ namespace Tracker.Data.Model
         public DateTime CreatedAt { get; set; }
         public string CreatedBy { get; set; }
         public DateTime GoalDate { get; set; }
-        public string Tag { get; set; }
+        public int? TagId { get; set; }
 
+        public virtual Tag Tag { get; set; }
         public virtual ICollection<Note> Notes { get; set; }
         public virtual ICollection<Colaborator> Colaborators { get; set; }
     }

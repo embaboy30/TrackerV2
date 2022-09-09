@@ -16,5 +16,6 @@ namespace Tracker.Data
         }
         public DbSet<Todo> Todo { get; set; }
         public DbSet<Note> Note { get; set; }
+        public DbSet<Tag> Tag { get; set; }
     }
 }

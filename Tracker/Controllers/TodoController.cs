@@ -48,5 +48,35 @@ namespace Tracker.Controllers
             var result = _todoRepository.DeleteTodo(id);
             return Ok(result);
         }
+
+        #region Tags
+
+        [HttpGet("Tag")]
+        public IActionResult GetTags()
+        {
+            var result = _todoRepository.GetTags();
+            return Ok(result);
+        }
+
+        [HttpPost("Tag")]
+        public IActionResult AddTag(Tag model)
+        {
+            var result = _todoRepository.AddTag(model);
+            return Ok(result);
+        }
+
+        [HttpPut("Tag")]
+        public IActionResult UpdateTag(Tag model)
+        {
+            var result = _todoRepository.UpdateTag(model);
+            return Ok(result);
+        }
+        [HttpDelete("Tag")]
+        public IActionResult DeleteTag(int id)
+        {
+            var result = _todoRepository.DeleteTag(id);
+            return Ok(result);
+        }
+        #endregion
     }
 }

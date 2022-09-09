@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Tracker.Data;
@@ -11,9 +12,10 @@ using Tracker.Data;
 namespace Tracker.Data.Migrations
 {
     [DbContext(typeof(TrackerDbContext))]
-    partial class TrackerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220909112027_updateTagsAndColab")]
+    partial class updateTagsAndColab
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -279,27 +281,6 @@ namespace Tracker.Data.Migrations
                     b.ToTable("Note");
                 });
 
-            modelBuilder.Entity("Tracker.Data.Model.Tag", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseSerialColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Color")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tag");
-                });
-
             modelBuilder.Entity("Tracker.Data.Model.Todo", b =>
                 {
                     b.Property<int>("Id")
@@ -322,7 +303,7 @@ namespace Tracker.Data.Migrations
                     b.Property<DateTime>("GoalDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<int?>("TagId")
+                    b.Property<int>("TagId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Title")
@@ -330,8 +311,6 @@ namespace Tracker.Data.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("TagId");
 
                     b.ToTable("Todo");
                 });
@@ -407,15 +386,6 @@ namespace Tracker.Data.Migrations
                     b.HasOne("Tracker.Data.Model.Todo", null)
                         .WithMany("Notes")
                         .HasForeignKey("TodoId");
-                });
-
-            modelBuilder.Entity("Tracker.Data.Model.Todo", b =>
-                {
-                    b.HasOne("Tracker.Data.Model.Tag", "Tag")
-                        .WithMany()
-                        .HasForeignKey("TagId");
-
-                    b.Navigation("Tag");
                 });
 
             modelBuilder.Entity("Tracker.Data.Model.Todo", b =>

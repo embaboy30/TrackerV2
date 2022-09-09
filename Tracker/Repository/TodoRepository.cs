@@ -21,7 +21,10 @@ namespace Tracker.Repository
         }
         public List<Todo> GetTodos()
         {
-            var result = _trackerDbContext.Todo.Include(x => x.Notes).ToList();
+            var result = _trackerDbContext.Todo
+                .Include(x => x.Notes)
+                .Include(x => x.Tag)
+                .ToList();
             return result;
         }
         public List<Todo> GetTodosByMonth(int month)
@@ -33,7 +36,7 @@ namespace Tracker.Repository
         {
             var data = _mapper.Map<Todo>(model);
             data.CreatedAt = DateTime.Now;
-            data.Tag = model.Tag;
+            data.TagId = model.TagId;
             data.CreatedBy = "admin"; // todo: use the current user
             _trackerDbContext.Todo.Add(data);
             _trackerDbContext.SaveChanges();
@@ -47,7 +50,7 @@ namespace Tracker.Repository
             todo.Description = model.Description;
             todo.Title = model.Title;
             todo.GoalDate = model.GoalDate;
-            todo.Tag = model.Tag;
+            todo.TagId = model.TagId;
             _trackerDbContext.Todo.Update(todo);
             return _trackerDbContext.SaveChanges();
         }
@@ -56,5 +59,32 @@ namespace Tracker.Repository
             _trackerDbContext.Todo.Remove(new Todo() { Id = id });
             return _trackerDbContext.SaveChanges();
         }
+
+        #region Tags
+        public List<Tag> GetTags()
+        {
+            return _trackerDbContext.Tag.ToList();
+        }
+        public int AddTag(Tag model)
+        {
+            _trackerDbContext.Tag.Add(model);
+            _trackerDbContext.SaveChanges();
+
+            return model.Id;
+        }
+        public int UpdateTag(Tag model)
+        {
+            var dbData = _trackerDbContext.Tag.Find(model.Id);
+            if (dbData == null) return 0;
+            _trackerDbContext.Tag.Update(model);
+            return _trackerDbContext.SaveChanges();
+        }
+        public int DeleteTag(int id)
+        {
+            _trackerDbContext.Tag.Remove(new Tag() { Id = id });
+            return _trackerDbContext.SaveChanges();
+        }
+
+        #endregion
     }
 }

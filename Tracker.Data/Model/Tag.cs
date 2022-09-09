@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Tracker.Data.Model
 {
-    public class Colaborator
+    public class Tag
     {
         public int Id { get; set; }
-        public virtual ApplicationUser User { get; set; }
+        public string Name { get; set; }
+        public string Color { get; set; }
     }
 }
