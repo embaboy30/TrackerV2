@@ -31,7 +31,7 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddCors(p => p.AddPolicy("corspolicy", build=>
 {
-    build.WithOrigins("http://localhost:4200", "https://trackerapp-37b9c.firebaseapp.com", "https://trackerapp-37b9c.web.app/").AllowAnyMethod().AllowAnyHeader();
+    build.WithOrigins("http://localhost:4200", "https://trackerapp-37b9c.firebaseapp.com", "https://trackerapp-37b9c.web.app").AllowAnyMethod().AllowAnyHeader();
 }));
 
 var app = builder.Build();
